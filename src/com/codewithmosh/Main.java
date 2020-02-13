@@ -24,14 +24,30 @@ public class Main {
         String words = "a green apple";
         char lowest = findFirstNonRepeatingCharacter(words);
 
-        System.out.println(lowest);*/
+        System.out.println(lowest);
 
         Set<Integer> set = new HashSet<>();
         int[] numbers = {1, 1, 3, 2, 2, 4, 3, 5, 6 , 7, 9};
         for (var number : numbers) {
             set.add(number);
         }
-        System.out.println(set);
+        System.out.println(set);*/
+
+        String words = "green apple";
+        System.out.println(findFirstRepeatedChar(words));
+    }
+
+    private static char findFirstRepeatedChar(String words) {
+        Set<Character> set = new HashSet<>();
+        var wordsArr = words.toCharArray();
+        for (var word : wordsArr) {
+            if (set.contains(word)) {
+                return word;
+            }
+            set.add(word);
+        }
+
+        return Character.MIN_VALUE;
     }
 
     private static char findFirstNonRepeatingCharacter(String words) {
