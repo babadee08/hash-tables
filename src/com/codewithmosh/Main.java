@@ -43,6 +43,7 @@ public class Main {
         table.put(6, "A");
         table.put(8, "B");
         table.put(11, "C");
+        table.remove(11);
         System.out.println(table.get(8));
     }
 
