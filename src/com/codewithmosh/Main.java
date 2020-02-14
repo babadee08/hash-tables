@@ -31,10 +31,21 @@ public class Main {
         for (var number : numbers) {
             set.add(number);
         }
-        System.out.println(set);*/
+        System.out.println(set);
 
         String words = "green apple";
-        System.out.println(findFirstRepeatedChar(words));
+        System.out.println(findFirstRepeatedChar(words));*/
+
+        System.out.println(hash("123456-A"));
+        System.out.println("orange".hashCode());
+    }
+
+    public static int hash(String key) {
+        int hash = 0;
+        for(char ch : key.toCharArray()) {
+            hash += ch;
+        }
+        return hash % 100;
     }
 
     private static char findFirstRepeatedChar(String words) {
