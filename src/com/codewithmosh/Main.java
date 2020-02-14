@@ -34,10 +34,16 @@ public class Main {
         System.out.println(set);
 
         String words = "green apple";
-        System.out.println(findFirstRepeatedChar(words));*/
+        System.out.println(findFirstRepeatedChar(words));
 
         System.out.println(hash("123456-A"));
-        System.out.println("orange".hashCode());
+        System.out.println("orange".hashCode());*/
+
+        HashTable table = new HashTable();
+        table.put(6, "A");
+        table.put(8, "B");
+        table.put(11, "C");
+        System.out.println(table.get(8));
     }
 
     public static int hash(String key) {

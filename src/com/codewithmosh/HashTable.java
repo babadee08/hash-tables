@@ -38,7 +38,16 @@ public class HashTable {
     }
 
     public String get(int key) {
-        return "";
+        var index = hash(key);
+        var bucket = entries[index];
+        if (bucket != null) {
+            for (var entry : bucket) {
+                if (entry.key == key) {
+                    return entry.value;
+                }
+            }
+        }
+        return null;
     }
 
     public void remove(int key) {
