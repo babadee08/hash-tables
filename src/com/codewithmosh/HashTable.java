@@ -16,7 +16,14 @@ public class HashTable {
     private LinkedList<Entry>[] entries = new LinkedList[5];
 
     public void put(int key, String value) {
-        var index = hash(key);
+        var entry = getEntry(key);
+        if (entry != null) {
+            entry.value = value;
+            return;
+        }
+        getOrCreateBucket(key).addLast(new Entry(key, value));
+
+        /*var index = hash(key);
         if (entries[index] == null) {
             entries[index] = new LinkedList<>();
         }
@@ -30,7 +37,7 @@ public class HashTable {
             }
         }
 
-        bucket.addLast(new Entry(key, value));
+        bucket.addLast(new Entry(key, value));*/
     }
 
     private int hash(int key) {
@@ -38,7 +45,10 @@ public class HashTable {
     }
 
     public String get(int key) {
-        var index = hash(key);
+        var entry = getEntry(key);
+        return (entry == null) ? null : entry.value;
+
+        /*var index = hash(key);
         var bucket = entries[index];
         if (bucket != null) {
             for (var entry : bucket) {
@@ -47,11 +57,17 @@ public class HashTable {
                 }
             }
         }
-        return null;
+        return null;*/
     }
 
     public void remove(int key) {
-        var index = hash(key);
+        var entry = getEntry(key);
+        if (entry == null) {
+            throw new IllegalStateException();
+        }
+        getBucket(key).remove(entry);
+
+        /*var index = hash(key);
         var bucket = entries[index];
         if (bucket == null) {
             throw new IllegalStateException();
@@ -63,6 +79,32 @@ public class HashTable {
                 return;
             }
         }
-        throw new IllegalStateException();
+        throw new IllegalStateException();*/
+    }
+
+    public Entry getEntry(int key) {
+        LinkedList<Entry> bucket = getBucket(key);
+        if (bucket != null) {
+            for (var entry : bucket) {
+                if (entry.key == key) {
+                    return entry;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private LinkedList<Entry> getBucket(int key) {
+        return entries[hash(key)];
+    }
+
+    private LinkedList<Entry> getOrCreateBucket(int key) {
+        var index = hash(key);
+        var bucket = entries[index];
+        if (bucket == null) {
+            entries[index] = new LinkedList<>();
+        }
+        return bucket;
     }
 }
